@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# Check exit status
+
+command="$$"
+tmp_file="checker_tmp_file_$RANDOM"
+
+# clean up
+stop_shell
+rm -f $tmp_file
+
+# create a pseudo random file
+touch $tmp_file
+# send commands
+echo -e "$command" | $SHELL > $OUTPUTFILE 2> /dev/null &
+echo -e "$command" | /bin/sh > answer 2> /dev/null &
+# wait a little bit
+$SLEEP $SLEEPSECONDS
+# check the result
+diff -q $OUTPUTFILE answer
+nmatch=$?
+if [ $nmatch -eq 0 ]; then
+	   print_ok_b
+else
+	   print_ko
+fi
+
+# clean up
+stop_shell
+rm -f $OUTPUTFILE
+rm -f answer
+rm -f $tmp_file

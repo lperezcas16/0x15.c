@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# Check if you Handle variables replacement (ONLY CHECKS IF YOU DO NOT THROWN ERROR XD)
+
+command="echo $PATH"
+
+# clean up
+stop_shell
+rm -f $tmp_file
+
+# send commands
+echo "$command" | $SHELL  > youroutput 2> /dev/null &
+echo "$command" | /bin/sh > $OUTPUTFILE 2> /dev/null &
+# wait a little bit
+$SLEEP $SLEEPSECONDS
+
+# check the result
+diff -q youroutput $OUTPUTFILE
+math=$?
+if [ $math -eq 0 ]; then
+    print_ok_b
+else
+    print_ko
+fi
+
+# clean up
+stop_shell
+rm -f $tmp_file
+rm -f youroutput

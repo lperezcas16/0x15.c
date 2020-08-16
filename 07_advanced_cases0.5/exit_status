@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# Checks exit with status
+
+command="exit 98"
+
+# clean up
+stop_shell
+rm -f $tmp_file
+
+# send commands
+echo "$command" | $SHELL
+match=$?
+# wait a little bit
+$SLEEP $SLEEPSECONDS
+
+# check the result
+if [ $match -eq 98 ]; then
+    print_ok_b
+else
+    print_ko
+fi
+
+# clean up
+stop_shell
+rm -f $tmp_file
+rm -f should_be
