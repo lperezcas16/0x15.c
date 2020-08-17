@@ -15,6 +15,20 @@ function print_ko()
 {
     echo -e "[\033[31mKO\033[37m]"
 }
+#######################################
+# Print OK in purple, followed by a new line
+# for advanced tasks
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+#######################################
+function print_ok_b()
+{
+    echo -e "[\033[1;35mOK\033[37m]"
+}
 
 #######################################
 # Print OK in green, followed by a new line
